@@ -1,29 +1,47 @@
-#include <bits/stdc++.h>
-using namespace std;
+#include <iostream>
 
-int kthSmallest(int arr[], int N, int K)
+int kth_largest(int box[], int length, int k)
 {
-    priority_queue<int> pq;
-
-    for (int i = 0; i < K; i++) {
-        pq.push(arr[i]);
+    int result[k];
+    int top=0;
+    int box2[length];
+    for (int i=0; i<length; i++)
+    {
+        box2[i]=box[i];
     }
-    for (int i = K; i < N; i++) {
-        if (arr[i] < pq.top()) {
-            pq.pop();
-            pq.push(arr[i]);
+
+    int cur_max=INT_MIN;
+    int cur_max_index;
+    for (int i=0; i<k; i++)
+    {
+        cur_max=INT_MIN;
+        cur_max_index=-1;
+        for (int j=0; j<length; j++)
+        {
+            if (box2[j]>cur_max)
+            {
+                cur_max=box2[j];
+                cur_max_index=j;
+            }
         }
+
+        result[top]=box2[cur_max_index];
+        top++;
+        box2[cur_max_index]=INT_MIN;
     }
 
-    return pq.top();
+    return result[k-1];
 }
 
 int main()
 {
-    int N = 10;
-    int arr[N] = { 10, 5, 4, 3, 48, 6, 2, 33, 53, 10 };
-    int K = 4;
+    int box[]={1,9,2,8,3,7,4,6,5};
+    int box_length=sizeof(box)/sizeof(int);
 
-    cout << "Kth Smallest Element is: "
-         << kthSmallest(arr, N, K);
+
+    //std::cout<<INT_MIN<<std::endl;
+    std::cout<<kth_largest(box,box_length,5);
+
+
+    return 0;
 }
