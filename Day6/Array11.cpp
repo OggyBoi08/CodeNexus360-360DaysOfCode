@@ -8,7 +8,7 @@ int rain_collected(int box[], int length)
     int result=0;
     for (int i=0; i<length; i++)
     {
-        if (box[i]>cur_peak)
+        if (box[i]>=cur_peak)
         {
             cur_peak=box[i];
             for (int j=i+1; j<length; j++)
