@@ -48,7 +48,7 @@ void merge_overlapping_intervals(INTERVAL box[], int length)
     for (int i=0; i<length; i++)
     {
         j=i+1;
-        while (box[i].y>=box[j].x && j<length)
+        while (box[j-1].y>=box[j].x && j<length)
         {
             j++;
         }
